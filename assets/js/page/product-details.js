@@ -2,11 +2,14 @@
 
 var app = angular.module('productApp', []);
 
-app.controller('productDetailsCtrl', function($scope, $http) {
-    
+app.config(["$locationProvider", function($locationProvider) { $locationProvider.html5Mode(true); }]);
+
+app.controller('productDetailsCtrl', function($scope, $http,  $location) {
+    var id = $location.path().split('/').slice(-1)[0];
+
     $http({
         method: 'GET',
-        url: 'http://27.147.135.164/ecomm/api/products/get_product/41',
+        url: 'http://27.147.135.164/ecomm/api/products/get_product/'+id,
         
     })
 
